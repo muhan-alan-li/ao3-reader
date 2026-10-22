@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "AO3 Paper Reader",
+  "version": "0.1.0",
+  "description": "Academic styling and a typeset reading view that preserve Archive of Our Own's native page structure.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Paper View",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://archiveofourown.org/*", "https://www.archiveofourown.org/*"],
+      "css": ["paper.css"],
+      "js": [
+        "content/state.js",
+        "content/titles.js",
+        "content/labels.js",
+        "content/overview.js",
+        "content/page.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["fonts/*.woff2"],
+    "matches": ["https://archiveofourown.org/*", "https://www.archiveofourown.org/*"]
+  }],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "paper-view@ao3-reader.local",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
+}

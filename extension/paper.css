@@ -1,0 +1,445 @@
+/* Restyle AO3 in place. Its layout, content sections, forms, and navigation
+   remain native. !important overrides site/work skin decoration only. */
+@font-face {
+  font-family: "Paper Latin Modern";
+  src: url("fonts/LM-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paper Latin Modern";
+  src: url("fonts/LM-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paper Latin Modern";
+  src: url("fonts/LM-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paper Latin Modern";
+  src: url("fonts/LM-bold-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+:root[data-paper-view="on"] {
+  color-scheme: light !important;
+  background: #f5f4f0 !important;
+  --paper-ink: #242424;
+  --paper-muted: #65696d;
+  --paper-link: #243d51;
+  --paper-rule: #d6d8d9;
+}
+:root[data-paper-view="on"] body {
+  background: #f5f4f0 !important;
+  color: var(--paper-ink) !important;
+  font: 16px/1.65 Georgia, "Times New Roman", serif !important;
+}
+:root[data-paper-view="on"] :is(#outer, #inner, #main, #work-skin) {
+  background: transparent !important;
+  color: var(--paper-ink) !important;
+  box-shadow: none !important;
+}
+
+/* Keep the original masthead, account controls, menu, and search in place. */
+:root[data-paper-view="on"] :is(#header, #footer, #header .primary, #header .secondary, #dashboard) {
+  background: #fafaf8 !important;
+  color: var(--paper-ink) !important;
+  border-color: var(--paper-rule) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+:root[data-paper-view="on"] #header { border-top: 3px solid var(--paper-link) !important; }
+:root[data-paper-view="on"] #header :is(.logo, .heading img, .heading sup) { display: none !important; }
+:root[data-paper-view="on"] :is(#header, #footer, #dashboard, #main) :is(h1, h2, h3, h4, h5, h6) {
+  font-family: Georgia, "Times New Roman", serif !important;
+  color: var(--paper-ink) !important;
+  background: transparent !important;
+  border-color: var(--paper-rule) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  line-height: 1.35 !important;
+}
+:root[data-paper-view="on"] :is(#header, #footer, #dashboard, #main) a {
+  color: var(--paper-link) !important;
+  background-color: transparent !important;
+  border-color: var(--paper-rule) !important;
+  text-shadow: none !important;
+}
+:root[data-paper-view="on"] a:hover { text-decoration: underline !important; }
+:root[data-paper-view="on"] :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid #416f94 !important;
+  outline-offset: 3px !important;
+}
+
+/* Keep the result list and filter sidebar native; typeset each work preview
+   as a paper abstract. All original links, fields, and metadata remain. */
+:root[data-paper-view="on"] #main .blurb {
+  border-color: var(--paper-rule) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #fafaf8 !important;
+}
+:root[data-paper-view="on"] #main .blurb .header { background: transparent !important; }
+:root[data-paper-view="on"] #main .blurb h4.heading { font-size: 20px !important; font-weight: normal !important; }
+:root[data-paper-view="on"] #main :is(.datetime, dl.stats) {
+  color: var(--paper-muted) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 12px !important;
+}
+
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+  padding: 26px 32px 20px !important;
+  margin: 22px 0 !important;
+  border: 1px solid #deded9 !important;
+  border-top: 2px solid #41464a !important;
+  background: #fff !important;
+  text-align: left !important;
+  overflow-wrap: break-word;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb::before {
+  content: "MANUSCRIPT";
+  order: -3;
+  margin-bottom: 14px;
+  color: var(--paper-muted);
+  font: 10px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: .17em;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > * { min-width: 0 !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .header {
+  order: -2;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-areas: "title date" "subject subject" "classification classification" !important;
+  gap: 10px 24px !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header h4.heading {
+  grid-area: title;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  line-height: 1.6 !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header h4.heading > a[href]:first-of-type:not([rel~="author"]) {
+  display: block !important;
+  margin: 0 0 9px !important;
+  color: #20272d !important;
+  border: 0 !important;
+  font: bold 25px/1.3 Georgia, "Times New Roman", serif !important;
+  text-decoration: none !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header a[rel~="author"] {
+  color: #454d54 !important;
+  font-style: italic !important;
+  text-decoration: none !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header .datetime {
+  grid-area: date;
+  position: static !important;
+  align-self: start;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+  font-size: 11px !important;
+  text-align: right !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header .datetime::before { content: "Updated "; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header .fandoms {
+  grid-area: subject;
+  margin: 0 !important;
+  font: italic 12px/1.6 Georgia, "Times New Roman", serif !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header .fandoms::before {
+  content: "Subject area: ";
+  color: var(--paper-muted);
+  font-style: normal;
+}
+
+/* Turn AO3's four square status symbols into an unobtrusive text line.
+   Reveal their existing accessible labels, retaining the symbol-help links. */
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .required-tags {
+  grid-area: classification;
+  position: static !important;
+  float: none !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px 12px !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  filter: none !important;
+  list-style: none !important;
+  font: 10px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .required-tags :is(li, a, span) {
+  position: static !important;
+  float: none !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  color: var(--paper-muted) !important;
+  font: inherit !important;
+  white-space: normal !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .required-tags .text {
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  text-indent: 0 !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .summary {
+  order: -1;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font: 15px/1.75 Georgia, "Times New Roman", serif !important;
+  text-align: justify !important;
+  hyphens: auto;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .summary::before {
+  content: "Abstract";
+  display: block;
+  margin-bottom: 7px;
+  color: var(--paper-ink);
+  font: bold 12px/1.5 Georgia, "Times New Roman", serif;
+  letter-spacing: .04em;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .summary p { margin: 0 0 .65em !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .summary p:last-child { margin-bottom: 0 !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .tags {
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: var(--paper-muted) !important;
+  font: 11px/1.8 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .tags::before { content: "Keywords: "; font-weight: 600; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .tags :is(li, a, strong) {
+  display: inline !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  color: inherit !important;
+  font: inherit !important;
+  text-decoration: none !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .tags li::after { content: "; " !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .tags li:last-child::after { content: "" !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .series {
+  margin: 0 0 16px !important;
+  color: var(--paper-muted) !important;
+  font: 12px/1.6 Georgia, "Times New Roman", serif !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > dl.stats {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  float: none !important;
+  gap: 3px 7px !important;
+  width: auto !important;
+  margin: 4px 0 0 !important;
+  padding: 12px 0 0 !important;
+  border-top: 1px solid var(--paper-rule) !important;
+  font-size: 10px !important;
+  line-height: 1.8 !important;
+  text-align: left !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > dl.stats :is(dt, dd) {
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > dl.stats dd { margin-right: 12px !important; }
+:root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .actions { margin-top: 14px !important; }
+
+/* Bookmark-only information stays attached to its manuscript as reader notes.
+   Keep the existing edit/delete actions and dynamic form containers intact. */
+:root[data-paper-view="on"] #main .bookmark.blurb > .user {
+  position: relative !important;
+  margin: 16px 0 0 !important;
+  padding: 14px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--paper-rule) !important;
+  font: 12px/1.7 Georgia, "Times New Roman", serif !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .user .byline {
+  margin: 0 0 4px !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .user .datetime {
+  position: static !important;
+  margin: 0 0 10px !important;
+  font-size: 10px !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .user :is(.meta, .notes) {
+  margin: 8px 0 !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .status {
+  order: 1;
+  position: static !important;
+  float: none !important;
+  margin: 14px 0 0 !important;
+  padding: 0 !important;
+  color: var(--paper-muted) !important;
+  font: 10px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .status :is(a, span) {
+  position: static !important;
+  float: none !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  color: inherit !important;
+  font: inherit !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .status .text {
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  text-indent: 0 !important;
+}
+:root[data-paper-view="on"] #main .bookmark.blurb > .status .count::before { content: " · Saved by "; }
+:root[data-paper-view="on"] :is(input, select, textarea) {
+  max-width: 100%;
+  border-color: #bfc4c7 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  color: var(--paper-ink) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  text-shadow: none !important;
+}
+:root[data-paper-view="on"] :is(.actions a, button, input[type="submit"], .actions input) {
+  border-color: #c7cccf !important;
+  background: #fafaf8 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--paper-link) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  text-shadow: none !important;
+}
+:root[data-paper-view="on"] #main :is(fieldset, dl.meta, .module, .notice, .comment) {
+  background-color: transparent !important;
+  border-color: var(--paper-rule) !important;
+  box-shadow: none !important;
+}
+:root[data-paper-view="on"] #main .userstuff { color: var(--paper-ink) !important; background: transparent !important; }
+
+/* Typeset the existing work container, keeping metadata, chapter navigation,
+   summaries, notes, illustrations, and discussion in their original positions. */
+:root[data-paper-view="on"] #main .paper-story-overview {
+  display: flow-root;
+  margin: 1em 0;
+  padding: 12px 16px;
+  border: 1px solid var(--paper-rule);
+  background: #fafaf8;
+}
+:root[data-paper-view="on"] #main .paper-story-overview > summary {
+  cursor: pointer;
+  color: var(--paper-muted);
+  font: 14px/1.6 Georgia, "Times New Roman", serif;
+}
+:root[data-paper-view="on"] #main .paper-story-overview > summary:focus-visible {
+  outline: 2px solid #416f94;
+  outline-offset: 3px;
+}
+:root[data-paper-view="on"] #main .paper-story-overview > dl.work.meta {
+  margin: 12px 0 0 !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #workskin {
+  box-sizing: border-box !important;
+  max-width: 1080px !important;
+  margin: 36px auto !important;
+  padding: 48px 64px !important;
+  background: #fff !important;
+  color: var(--paper-ink) !important;
+  font: 18px/1.6 "Paper Latin Modern", "Latin Modern Roman", "Computer Modern", "Times New Roman", serif !important;
+  box-shadow: 0 1px 8px #00000012 !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #workskin :is(h1, h2, h3, h4, h5, h6, .userstuff) {
+  font-family: "Paper Latin Modern", "Latin Modern Roman", "Computer Modern", "Times New Roman", serif !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #workskin .preface h2.title {
+  font-size: 29px !important;
+  font-weight: normal !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #workskin .byline { font-size: 16px !important; font-weight: normal !important; }
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .title { font-size: 19px !important; }
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff {
+  font: 18px/1.6 "Paper Latin Modern", "Latin Modern Roman", "Computer Modern", "Times New Roman", serif !important;
+  text-align: justify !important;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff p {
+  margin: 0 0 .9em !important;
+  text-indent: 1.5em !important;
+  font: inherit !important;
+  color: inherit !important;
+  background: transparent !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff :is(span, font) {
+  color: inherit !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  text-shadow: none !important;
+}
+/* Start sections flush left, including AO3's hidden Chapter Text heading.
+   Use sibling selectors so wrappers and nested quotations work as well. */
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff p:first-child,
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff :is(h1, h2, h3, h4, h5, h6, hr, blockquote, ul, ol) + p,
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff :is(li, blockquote) p {
+  text-indent: 0 !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff hr {
+  width: 30% !important;
+  margin: 1.6em auto !important;
+  border: 0 !important;
+  border-top: 1px solid var(--paper-rule) !important;
+}
+:root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff :is(img, video, iframe) { max-width: 100% !important; height: auto !important; }
+
+@media (max-width: 700px) {
+  :root[data-paper-view="on"] #main :is(.work, .bookmark).blurb { padding: 20px !important; }
+  :root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .header {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: "title" "date" "subject" "classification" !important;
+    gap: 8px !important;
+  }
+  :root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header h4.heading > a[href]:first-of-type:not([rel~="author"]) { font-size: 22px !important; }
+  :root[data-paper-view="on"] #main :is(.work, .bookmark).blurb .header .datetime { text-align: left !important; }
+  :root[data-paper-view="on"] #main :is(.work, .bookmark).blurb > .summary { text-align: left !important; }
+  :root[data-paper-page="manuscript"][data-paper-view="on"] #workskin { margin: 16px auto !important; padding: 24px 16px !important; }
+  :root[data-paper-page="manuscript"][data-paper-view="on"] #workskin .preface { margin-left: 0 !important; margin-right: 0 !important; }
+  :root[data-paper-page="manuscript"][data-paper-view="on"] #chapters .userstuff { font-size: 17px !important; text-align: left !important; }
+}
+@media print {
+  :root[data-paper-view="on"] body { background: white !important; }
+  :root[data-paper-page="manuscript"][data-paper-view="on"] #workskin { max-width: none !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
+}
